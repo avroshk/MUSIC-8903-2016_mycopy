@@ -101,10 +101,13 @@ int main(int argc, char* argv[])
 
     //////////////////////////////////////////////////////////////////////////////
     // clean-up
-    phAudioFile->destroy(phAudioFile);
-    free(phAudioFile);
+    // clean-up
+    for(int i = 0; i < psFileSpec.iNumChannels; i++) {
+        delete [] ppfAudioData[i];
+    }
+    delete [] ppfAudioData;
     
-    delete ppfAudioData;
+    phAudioFile->destroy(phAudioFile);
 
     return 0;
     
